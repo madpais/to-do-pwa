@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My PWA</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#317EFB" />
+  </head>
+  <body>
+    <h1>Bem-vindo à Minha PWA!</h1>
+    <p>Este é um aplicativo web progressivo básico.</p>
+
+    <script src="app.js"></script>
+    <script>
+      // Registrar o Service Worker
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          navigator.serviceWorker
+            .register("/service-worker.js")
+            .then((registration) => {
+              console.log(
+                "Service Worker registrado com sucesso:",
+                registration
+              );
+            })
+            .catch((error) => {
+              console.log("Falha ao registrar o Service Worker:", error);
+            });
+        });
+      }
+    </script>
+  </body>
+</html>
