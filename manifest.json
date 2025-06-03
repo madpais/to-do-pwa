@@ -2,7 +2,7 @@
   "name": "Minha PWA Básica",
   "short_name": "PWA Básica",
   "description": "Uma aplicação web progressiva de exemplo.",
-  "start_url": "/index.html",
+  "start_url": "/ppwwaa/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#317EFB",
