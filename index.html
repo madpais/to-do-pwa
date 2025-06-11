@@ -4,21 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>My PWA</title>
-    <link rel="stylesheet" href="./style.css" />
     <link rel="manifest" href="./manifest.json" />
     <meta name="theme-color" content="#317EFB" />
   </head>
   <body>
     <h1>Bem-vindo à Minha PWA!</h1>
     <p>Este é um aplicativo web progressivo básico.</p>
-
-    <script src="app.js"></script>
+    <nav>
+      <a href="/index.html">Home</a>
+      <a href="/about.html">Sobre</a>
+    </nav>
+    <button id="catch-all">Catch them all</button>
     <script>
-      // Registrar o Service Worker
       if ("serviceWorker" in navigator) {
         window.addEventListener("load", () => {
           navigator.serviceWorker
-            .register("/service-worker.js")
+            .register("/sw.js")
             .then((registration) => {
               console.log(
                 "Service Worker registrado com sucesso:",
@@ -30,6 +31,25 @@
             });
         });
       }
+
+      document.getElementById("catch-all").addEventListener("click", () => {
+        fetch("https://pokeapi.co/api/v2/pokemon/ditto")
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
+            }
+            return response.json();
+          })
+          .then((data) => {
+            console.log("Pokemon data:", data);
+          })
+          .catch((error) => {
+            console.error(
+              "There has been a problem with your fetch operation:",
+              error
+            );
+          });
+      });
     </script>
   </body>
 </html>
