@@ -24,3 +24,20 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   console.log("Service Worker activating.");
 });
+
+self.addEventListener('fetch', event => {
+  event.respondWith(
+    // Tenta encontrar a resposta no cache primeiro.
+    caches.match(event.request)
+      .then(response => {
+        // Se a resposta estiver no cache, a retorna.
+        // Se não, faz a requisição à rede.
+        return response || fetch(event.request);
+      })
+      .catch(() => {
+        // Se a rede também falhar (offline),
+        // retorna a página offline de fallback.
+        return caches.match('/offline.html');
+      })
+  );
+});
